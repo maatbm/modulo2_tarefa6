@@ -9,4 +9,5 @@ export const Container = styled.div`
     padding: 1rem;
     justify-content: center;
     align-items: center;
+    background-color: var(--black-background);
 `;
