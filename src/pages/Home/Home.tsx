@@ -1,9 +1,10 @@
 import "./HomeStyle";
+import { PokemonList } from "../../components/PokemonList/PokemonList";
 
 export function Home() {
   return (
     <div>
-      <h1>Home</h1>
+      <PokemonList />
     </div>
   );
 }
