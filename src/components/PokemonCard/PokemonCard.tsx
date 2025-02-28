@@ -1,4 +1,4 @@
-import "./PokemonCardStyle";
+import {Container} from "./PokemonCardStyle";
 
 interface Props {
   name: string;
@@ -6,8 +6,8 @@ interface Props {
 
 export function PokemonCard({ name }: Props) {
   return (
-    <div>
+    <Container>
       <h1>{name}</h1>
-    </div>
+    </Container>
   );
 }

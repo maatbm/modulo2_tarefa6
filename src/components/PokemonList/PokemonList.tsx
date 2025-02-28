@@ -1,5 +1,5 @@
 import axios from "axios";
-import "./PokemonListStyle";
+import { Container } from "./PokemonListStyle";
 import { useEffect, useState } from "react";
 import { PokemonCard } from "../PokemonCard/PokemonCard";
 
@@ -25,11 +25,11 @@ export function PokemonList() {
 
   return (
     <>
-      {pokemonList.map((pokemon) => (
-        <div key={pokemon.name}>
-          <PokemonCard name={pokemon.name} />
-        </div>
-      ))}
+      <Container>
+        {pokemonList.map((pokemon, index) => (
+          <PokemonCard key={index} name={pokemon.name} />
+        ))}
+      </Container>
     </>
   );
 }
