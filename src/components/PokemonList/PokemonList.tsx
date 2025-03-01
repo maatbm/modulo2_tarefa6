@@ -24,12 +24,10 @@ export function PokemonList() {
   }, []);
 
   return (
-    <>
-      <Container>
-        {pokemonList.map((pokemon, index) => (
-          <PokemonCard key={index} name={pokemon.name} />
-        ))}
-      </Container>
-    </>
+    <Container>
+      {pokemonList.map((pokemon, index) => (
+        <PokemonCard key={index} name={pokemon.name} />
+      ))}
+    </Container>
   );
 }

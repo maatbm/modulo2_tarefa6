@@ -5,7 +5,7 @@ export const Container = styled.div`
     height: 100vh;
     display: grid;
     grid-template-columns: repeat(5, 1fr);
-    gap: 1rem;
+    gap: 2rem;
     padding: 1rem;
     justify-content: center;
     align-items: center;
