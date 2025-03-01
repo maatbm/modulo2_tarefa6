@@ -1,54 +1,106 @@
-# React + TypeScript + Vite
+# Pokemon List Viewer - A Modern React Application for Pokemon Data Display
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This React application provides a clean and efficient way to browse Pokemon data from the PokeAPI. Built with TypeScript and Vite, it offers a responsive interface that displays Pokemon information in an organized card layout. The application leverages modern React patterns and tools to deliver a smooth user experience while maintaining type safety and code quality.
 
-Currently, two official plugins are available:
+The application features a component-based architecture that separates concerns between data fetching, display, and routing. It uses styled-components for styling, axios for API requests, and implements React Router for navigation. The Pokemon data is fetched from the PokeAPI and displayed in a grid of cards, making it easy for users to browse through the Pokemon collection.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+## Repository Structure
+```
+.
+├── src/                          # Source code directory
+│   ├── components/               # Reusable React components
+│   │   ├── PokemonCard/         # Pokemon card component and styles
+│   │   └── PokemonList/         # Pokemon list container and styles
+│   ├── pages/                   # Page components
+│   │   └── Home/               # Home page component
+│   ├── routes/
+|   |   └── AppRoutes/                 # Routing configuration
+│   ├── App.tsx                  # Main application component
+│   └── main.tsx                 # Application entry point
+├── vite.config.ts              # Vite build configuration
+├── tsconfig*.json              # TypeScript configuration files
+├── package.json                # Project dependencies and scripts
+└── eslint.config.js           # ESLint configuration
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Usage Instructions
+### Prerequisites
+- Node.js (version 14 or higher)
+- npm or yarn package manager
+- Modern web browser
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+### Installation
+```bash
+# Clone the repository
+git clone <repository-url>
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
+# Navigate to project directory
+cd pokemon-list-viewer
+
+# Install dependencies
+npm install
 ```
+
+### Quick Start
+1. Start the development server:
+```bash
+npm run dev
+```
+
+2. Open your browser and navigate to `http://localhost:5173`
+
+3. The application will display a grid of Pokemon cards fetched from the PokeAPI
+
+### More Detailed Examples
+#### Fetching Pokemon Data
+```typescript
+import axios from "axios";
+
+async function getPokemonsData() {
+  try {
+    const response = await axios.get("https://pokeapi.co/api/v2/pokemon");
+    return response.data.results;
+  } catch (error) {
+    console.error("Error fetching Pokemon data:", error);
+  }
+}
+```
+
+### Troubleshooting
+#### API Connection Issues
+- Problem: Pokemon data not loading
+- Error message: "Error fetching Pokemon data"
+- Solution steps:
+  1. Check your internet connection
+  2. Verify the PokeAPI endpoint status at https://pokeapi.co/
+  3. Check browser console for detailed error messages
+  4. Enable debug logging by adding `console.log` statements in the `getPokemonsData` function
+
+#### Development Server Issues
+- Problem: Development server not starting
+- Solution:
+  1. Clear npm cache: `npm cache clean --force`
+  2. Delete node_modules: `rm -rf node_modules`
+  3. Reinstall dependencies: `npm install`
+  4. Restart development server: `npm run dev`
+
+## Data Flow
+The application follows a straightforward data flow where Pokemon data is fetched from the PokeAPI, stored in component state, and rendered as cards in a grid layout.
+
+```ascii
++-------------+     +--------------+     +---------------+     +-------------+
+|             |     |              |     |               |     |             |
+| PokeAPI     +---->+ PokemonList  +---->+ State         +---->+ PokemonCard |
+|             |     | Component    |     | Management    |     | Components  |
++-------------+     +--------------+     +---------------+     +-------------+
+```
+
+Component Interactions:
+1. PokemonList component initiates API request on mount using useEffect
+2. Axios handles the HTTP GET request to PokeAPI
+3. Response data is stored in component state using useState
+4. Pokemon data is mapped to individual PokemonCard components
+5. Each PokemonCard receives Pokemon name as props
+6. Components use styled-components for consistent styling
+7. Error handling is implemented at the API request level
+8. React Router manages navigation between views
